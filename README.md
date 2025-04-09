@@ -1,6 +1,6 @@
 # Transaction Categorization Service
 
-A powerful and scalable backend service that automatically categorizes financial transactions into predefined expense categories. Built with **Java 17**, **Spring Boot**, and **PostgreSQL**, this service is designed for seamless integration into financial platforms, empowering users to understand and analyze their spending patterns.
+A powerful and scalable backend service that automatically categorizes financial transactions into predefined expense categories. Built with **Java 21**, **Spring Boot**, and **PostgreSQL**, this service is designed for seamless integration into financial platforms, empowering users to understand and analyze their spending patterns.
 
 ---
 
