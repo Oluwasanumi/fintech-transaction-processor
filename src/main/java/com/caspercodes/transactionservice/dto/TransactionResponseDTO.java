@@ -8,5 +8,5 @@ public record TransactionResponseDTO(
         UUID id,
         BigDecimal amount,
         LocalDateTime transactionDate,
-        String category) {
-}
+        String category
+) {}

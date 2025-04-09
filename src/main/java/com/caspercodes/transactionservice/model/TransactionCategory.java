@@ -1,5 +1,6 @@
 package com.caspercodes.transactionservice.model;
 
+import com.caspercodes.transactionservice.exception.InvalidCategoryException;
 import lombok.Getter;
 
 @Getter
@@ -25,4 +26,12 @@ public enum TransactionCategory {
         this.displayName = displayName;
     }
 
+    public static TransactionCategory fromString(String category) {
+        for (TransactionCategory categoryEnum : TransactionCategory.values()) {
+            if (categoryEnum.name().equalsIgnoreCase(category)) {
+                return categoryEnum;
+            }
+        }
+        throw new InvalidCategoryException("Invalid category provided: " + category);
+    }
 }

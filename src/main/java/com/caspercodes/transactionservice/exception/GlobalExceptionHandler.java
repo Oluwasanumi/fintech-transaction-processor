@@ -9,29 +9,34 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@RestControllerAdvice // This annotation is for it to handle exceptions globally for all controllers
-public class GlobalExceptionHandler extends RuntimeException {
+@RestControllerAdvice
+public class GlobalExceptionHandler {
 
-  // To handle TransactionNotFoundException
+  // Handle TransactionNotFoundException
   @ExceptionHandler(TransactionNotFoundException.class)
   public ResponseEntity<Object> handleTransactionNotFoundException(TransactionNotFoundException ex) {
     return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
   }
 
-  // To handle IllegalArgumentException (such as invalid category)
+  // Handle InvalidCategoryException
+  @ExceptionHandler(InvalidCategoryException.class)
+  public ResponseEntity<Object> handleInvalidCategoryException(InvalidCategoryException ex) {
+    return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+  }
+
+  // Handle IllegalArgumentException (e.g., invalid category input)
   @ExceptionHandler(IllegalArgumentException.class)
   public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex) {
     return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
   }
 
-  // To handle all other exceptions that I don't catch
+  // Handle generic exceptions (unexpected issues)
   @ExceptionHandler(Exception.class)
   public ResponseEntity<Object> handleGenericException(Exception ex) {
     return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred");
   }
 
-
-  // For consistent error responses
+  // Standard error response builder
   private ResponseEntity<Object> buildErrorResponse(HttpStatus status, String message) {
     Map<String, Object> body = new LinkedHashMap<>();
     body.put("message", message);
